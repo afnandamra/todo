@@ -1,13 +1,18 @@
-import React from 'react';
-
 import ToDo from './components/todo/todo.js';
+import './app.scss';
+import { Navbar } from 'react-bootstrap';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
-        <ToDo />
-      </>
-    );
-  }
-}
+const App = () => {
+  return (
+    <>
+      <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar.Brand href="#home">
+          Home
+        </Navbar.Brand>
+      </Navbar>
+      <ToDo />
+    </>
+  );
+};
+
+export default App;

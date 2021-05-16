@@ -1,37 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+import { Card, Container, ProgressBar, Col, Row } from 'react-bootstrap';
 
 import './todo.scss';
 
-class ToDo extends React.Component {
+const ToDo = () => {
+  const [list, setList] = useState([]);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-    };
-  }
+  useEffect(
+    () =>
+      (document.title = `To Do List: ${
+        list.filter((item) => !item.complete).length
+      }`)
+  );
 
-  addItem = (item) => {
+  const _addItem = (item) => {
     item._id = Math.random();
     item.complete = false;
-    this.setState({ list: [...this.state.list, item]});
+    setList([...list, item]);
   };
 
-  toggleComplete = id => {
-
-    let item = this.state.list.filter(i => i._id === id)[0] || {};
+  const _toggleComplete = (id) => {
+    let item = list.filter((i) => i._id === id)[0] || {};
 
     if (item._id) {
       item.complete = !item.complete;
-      let list = this.state.list.map(listItem => listItem._id === item._id ? item : listItem);
-      this.setState({list});
+      let newList = list.map((listItem) =>
+        listItem._id === item._id ? item : listItem
+      );
+      setList(newList);
     }
-
   };
 
-  componentDidMount() {
+  const _getTodoItems = () => {
     let list = [
       { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
       { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
@@ -39,35 +41,62 @@ class ToDo extends React.Component {
       { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
       { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
     ];
+    setList(list);
+  };
 
-    this.setState({list});
-  }
+  useEffect(_getTodoItems, []);
 
-  render() {
-    return (
-      <>
-        <header>
-          <h2>
-          There are {this.state.list.filter(item => !item.complete).length} Items To Complete
-          </h2>
-        </header>
-
-        <section className="todo">
-
-          <div>
-            <TodoForm handleSubmit={this.addItem} />
-          </div>
-
-          <div>
-            <TodoList
-              list={this.state.list}
-              handleComplete={this.toggleComplete}
+  return (
+    <>
+    <Container>
+      <Row className="mt-5 mb-4">
+        <Col>
+      <Card className="bg-light">
+        <Card.Body>
+        <Card.Title as="h2">To Do List Manager</Card.Title>
+          <ProgressBar>
+            <ProgressBar
+              striped
+              variant="success"
+              now={
+                list.filter((item) => item.complete).length * list.length * 100
+              }
+              key={1}
+              label={`Completed Items: ${
+                list.filter((item) => item.complete).length
+              }`}
             />
-          </div>
-        </section>
-      </>
-    );
-  }
-}
+            <ProgressBar
+              variant="warning"
+              now={
+                list.filter((item) => !item.complete).length * list.length * 100
+              }
+              key={2}
+              label={`To Do: ${list.filter((item) => !item.complete).length}`}
+            />
+          </ProgressBar>
+        </Card.Body>
+      </Card>
+      </Col>
+      </Row>
+      {/* </Container>
+
+      <Container className="todo"> */}
+      <Row>
+        <Col md="4" offset="2">
+        <Card>
+          <TodoForm handleSubmit={_addItem} />
+        </Card>
+        </Col>
+        <Col md="8" offset="2">
+        <Card>
+          <TodoList list={list} handleComplete={_toggleComplete} />
+        </Card>
+        </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
 
 export default ToDo;

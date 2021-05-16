@@ -20,6 +20,7 @@
 ## Resources
 
 - [React docs](https://reactjs.org/docs/getting-started.html)
+- [React bootstrap docs](https://react-bootstrap.netlify.app/)
 
 
 ------------
