@@ -67,7 +67,7 @@ const ToDo = () => {
               }`}
             />
             <ProgressBar
-              variant="warning"
+              variant="danger"
               now={
                 list.filter((item) => !item.complete).length * list.length * 100
               }
