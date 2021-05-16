@@ -15,7 +15,7 @@
 
 ### UML Diagram
 
-![UML Lab31](public/UML31.jpg)
+![UML Lab31](public/lab31.jpg)
 
 ## Resources
 

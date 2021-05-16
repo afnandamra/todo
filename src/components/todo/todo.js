@@ -79,9 +79,7 @@ const ToDo = () => {
       </Card>
       </Col>
       </Row>
-      {/* </Container>
 
-      <Container className="todo"> */}
       <Row>
         <Col md="4" offset="2">
         <Card>
