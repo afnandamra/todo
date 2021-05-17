@@ -11,6 +11,8 @@ const TodoList = (props) => {
           variant={item.complete ? `success` : `danger`}
           onClick={() => props.handleComplete(item._id)}
         >
+          <strong style={{fontSize: '75%'}}>{item.assignee}</strong>
+          <br/>
           {item.text}
         </ListGroup.Item>
       ))}
