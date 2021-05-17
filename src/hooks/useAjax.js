@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
 
 const useAjax = (url) => {
-  const [list, setList] = useState([]);
 
   const _RESTItems = async (method, url, item) => {
     const result = await axios({
@@ -32,14 +30,10 @@ const useAjax = (url) => {
   };
 
   const _getItems = () => {
-    const fetchData = async () => {
-      let data = await _RESTItems('get', url);
-      setList(data.results);
-    };
-    fetchData();
+      return _RESTItems('get', url);
   };
 
-  return [list, _postItem, _deleteItem, _putItem, _getItems];
+  return [_postItem, _deleteItem, _putItem, _getItems];
 };
 
 export default useAjax;
