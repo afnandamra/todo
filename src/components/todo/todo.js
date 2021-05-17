@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
-import { Card, Container, ProgressBar, Col, Row } from 'react-bootstrap';
+import TopSection from './progress.js';
+import { Container, Col, Row } from 'react-bootstrap';
 
 import './todo.scss';
 
@@ -35,11 +36,41 @@ const ToDo = () => {
 
   const _getTodoItems = () => {
     let list = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B'},
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
+      {
+        _id: 1,
+        complete: false,
+        text: 'Clean the Kitchen',
+        difficulty: 3,
+        assignee: 'Person A',
+      },
+      {
+        _id: 2,
+        complete: false,
+        text: 'Do the Laundry',
+        difficulty: 2,
+        assignee: 'Person A',
+      },
+      {
+        _id: 3,
+        complete: false,
+        text: 'Walk the Dog',
+        difficulty: 4,
+        assignee: 'Person B',
+      },
+      {
+        _id: 4,
+        complete: true,
+        text: 'Do Homework',
+        difficulty: 3,
+        assignee: 'Person C',
+      },
+      {
+        _id: 5,
+        complete: false,
+        text: 'Take a Nap',
+        difficulty: 1,
+        assignee: 'Person B',
+      },
     ];
     setList(list);
   };
@@ -47,53 +78,22 @@ const ToDo = () => {
   useEffect(_getTodoItems, []);
 
   return (
-    <>
     <Container>
       <Row className="mt-5 mb-4">
         <Col>
-      <Card className="bg-light">
-        <Card.Body>
-        <Card.Title as="h2">To Do List Manager</Card.Title>
-          <ProgressBar>
-            <ProgressBar
-              striped
-              variant="success"
-              now={
-                list.filter((item) => item.complete).length * list.length * 100
-              }
-              key={1}
-              label={`Completed Items: ${
-                list.filter((item) => item.complete).length
-              }`}
-            />
-            <ProgressBar
-              variant="danger"
-              now={
-                list.filter((item) => !item.complete).length * list.length * 100
-              }
-              key={2}
-              label={`To Do: ${list.filter((item) => !item.complete).length}`}
-            />
-          </ProgressBar>
-        </Card.Body>
-      </Card>
-      </Col>
+          <TopSection list={list} />
+        </Col>
       </Row>
 
       <Row>
-        <Col md="4" offset="2">
-        <Card>
+        <Col md="4">
           <TodoForm handleSubmit={_addItem} />
-        </Card>
         </Col>
-        <Col md="8" offset="2">
-        <Card>
+        <Col md="8">
           <TodoList list={list} handleComplete={_toggleComplete} />
-        </Card>
         </Col>
-        </Row>
-      </Container>
-    </>
+      </Row>
+    </Container>
   );
 };
 

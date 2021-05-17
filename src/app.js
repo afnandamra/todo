@@ -1,6 +1,6 @@
-import ToDo from './components/todo/todo.js';
+import ToDo from './components/todo/todo-connected.js';
 import './app.scss';
-import NavBar from './components/todo/Navbar.js';
+import NavBar from './components/header/Navbar.js';
 
 const App = () => {
   return (
