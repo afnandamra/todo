@@ -1,31 +1,31 @@
 # LAB - Hooks API
 
 **To Do List Manager Phase 1:** Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
+**To Do List Manager Phase 2:** Connecting the To Do Application to an external API and Database
 
 **Author:** Afnan Damra
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 **Links:**
 
 - [Repo Link](https://github.com/afnandamra/todo)
 - [Deployed Site](https://ad-todo-401.netlify.app/)
-- [PR Link](https://github.com/afnandamra/todo/pull/1)
+- [PR Link](https://github.com/afnandamra/todo/pull/2)
 
 ## Documentation
 
 ### UML Diagram
 
-![UML Lab31](public/lab31.jpg)
+![UML Lab32](public/lab32.jpg)
 
 ## Resources
 
 - [React docs](https://reactjs.org/docs/getting-started.html)
 - [React bootstrap docs](https://react-bootstrap.netlify.app/)
 - [starter code](https://github.com/LTUC/amman-javascript-401d7/tree/main/class-31/lab/starter-code)
+- [useFetch — A Custom React Hook](https://medium.com/swlh/usefetch-a-custom-react-hook-36d5f5819d8)
 
-
-------------
-
+---
 
 ## Getting Started with Create React App
 
