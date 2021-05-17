@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import useAjax from '../../hooks/useAjax.js';
+import { Container, Col, Row } from 'react-bootstrap';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import TopSection from './progress.js';
-import { Container, Col, Row } from 'react-bootstrap';
-
+import useAjax from '../../hooks/useAjax.js'
 import './todo.scss';
 
+const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
+
 const ToDo = () => {
-  const [list, _addItem, _toggleComplete, _getTodoItems, _deleteItem] =
-    useAjax();
+  const [list, _postItem, _deleteItem, _putItem, _getItems] = useAjax(todoAPI);
 
   useEffect(
     () =>
@@ -18,7 +18,7 @@ const ToDo = () => {
       }`)
   );
 
-  useEffect(_getTodoItems, [_getTodoItems]);
+  useEffect(_getItems, [_getItems]);
 
   return (
     <Container>
@@ -30,12 +30,12 @@ const ToDo = () => {
 
       <Row>
         <Col md="4">
-          <TodoForm handleSubmit={_addItem} />
+          <TodoForm handleSubmit={_postItem} />
         </Col>
         <Col md="8">
           <TodoList
             list={list}
-            handleComplete={_toggleComplete}
+            handleComplete={_putItem}
             handleDelete={_deleteItem}
           />
         </Col>

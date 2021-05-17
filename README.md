@@ -23,10 +23,9 @@
 - [React docs](https://reactjs.org/docs/getting-started.html)
 - [React bootstrap docs](https://react-bootstrap.netlify.app/)
 - [starter code](https://github.com/LTUC/amman-javascript-401d7/tree/main/class-31/lab/starter-code)
+- [useFetch — A Custom React Hook](https://medium.com/swlh/usefetch-a-custom-react-hook-36d5f5819d8)
 
-
-------------
-
+---
 
 ## Getting Started with Create React App
 
