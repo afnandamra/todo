@@ -19,13 +19,16 @@ const ToDo = () => {
       }`)
   );
 
-  useEffect(() => {
+  const _firstRequest = () => {
     const fetchData = async () => {
       const data = await _getItems();
       setList(data.results);
     };
     fetchData();
-  }, [_getItems]);
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(_firstRequest, []);
 
   return (
     <Container>
@@ -37,13 +40,14 @@ const ToDo = () => {
 
       <Row>
         <Col md="4">
-          <TodoForm handleSubmit={_postItem} />
+          <TodoForm handleSubmit={_postItem} fetch={_firstRequest}/>
         </Col>
         <Col md="8">
           <TodoList
             list={list}
             handleComplete={_putItem}
             handleDelete={_deleteItem}
+            fetch={_firstRequest}
           />
         </Col>
       </Row>
