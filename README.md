@@ -11,7 +11,7 @@
 
 - [Repo Link](https://github.com/afnandamra/todo)
 - [Deployed Site](https://ad-todo-401.netlify.app/)
-- [PR Link](https://github.com/afnandamra/todo/pull/2)
+- [PR Link](https://github.com/afnandamra/todo/pull/3)
 
 ## Documentation
 
