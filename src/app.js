@@ -1,12 +1,15 @@
+import PaginationProvider from './context/pagenation.js';
 import ToDo from './components/todo/todo-connected.js';
-import './app.scss';
 import NavBar from './components/header/Navbar.js';
+import './app.scss';
 
 const App = () => {
   return (
     <>
       <NavBar />
-      <ToDo />
+      <PaginationProvider>
+        <ToDo />
+      </PaginationProvider>
     </>
   );
 };

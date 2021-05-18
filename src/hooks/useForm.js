@@ -7,10 +7,10 @@ const useForm = (handleSubmit) => {
     setItem({ ...item, [e.target.name]: e.target.value });
   };
 
-  const _handleSubmit = (e) => {
+  const _handleSubmit = async (e) => {
     e.preventDefault();
     e.target.reset();
-    handleSubmit(item);
+    await handleSubmit(item);
     const newItem = {};
     setItem({ newItem });
   };

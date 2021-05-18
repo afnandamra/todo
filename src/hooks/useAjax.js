@@ -14,23 +14,23 @@ const useAjax = (url) => {
     return result.data;
   };
 
-  const _postItem = (item) => {
-    _RESTItems('post', url, item);
+  const _postItem = async (item) => {
+    await _RESTItems('post', url, item);
   };
 
-  const _deleteItem = (item) => {
+  const _deleteItem = async (item) => {
     let extendedUrl = `${url}/${item._id}`;
-    _RESTItems('delete', extendedUrl, item);
+    await _RESTItems('delete', extendedUrl, item);
   };
 
-  const _putItem = (item) => {
+  const _putItem = async (item) => {
     item.complete = !item.complete;
     let extendedUrl = `${url}/${item._id}`;
-    _RESTItems('put', extendedUrl, item);
+    await _RESTItems('put', extendedUrl, item);
   };
 
-  const _getItems = () => {
-      return _RESTItems('get', url);
+  const _getItems = async () => {
+    return _RESTItems('get', url);
   };
 
   return [_postItem, _deleteItem, _putItem, _getItems];

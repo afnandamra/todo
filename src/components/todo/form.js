@@ -8,7 +8,7 @@ const TodoForm = (props) => {
     <Card>
       <Card.Header as="h3">Add Item</Card.Header>
       <Card.Body>
-        <Form onSubmit={_handleSubmit}>
+        <Form onSubmit={async (e) => {await _handleSubmit(e); await props.fetch();}}>
           <Form.Group>
             <Form.Label>To Do Item</Form.Label>
             <Form.Control

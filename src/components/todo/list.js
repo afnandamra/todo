@@ -7,13 +7,13 @@ const TodoList = (props) => {
         <Toast
           key={item._id}
           style={{ maxWidth: '100%' }}
-          onClose={() => props.handleDelete(item)}
+          onClose={async () => {await props.handleDelete(item); await props.fetch();}}
         >
           <Toast.Header>
             <Badge
               pill
               variant={item.complete ? 'success' : 'warning'}
-              onClick={() => props.handleComplete(item)}
+              onClick={async () => {await props.handleComplete(item); await props.fetch();}}
               style={{ cursor: 'pointer' }}
             >
               {item.complete ? 'Complete' : 'Pending...'}
