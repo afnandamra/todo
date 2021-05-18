@@ -10,13 +10,24 @@ const TodoList = (props) => {
           onClose={() => props.handleDelete(item)}
         >
           <Toast.Header>
-            <Badge pill variant={item.complete ? 'success' : 'warning'}>
+            <Badge
+              pill
+              variant={item.complete ? 'success' : 'warning'}
+              onClick={() => props.handleComplete(item)}
+              style={{ cursor: 'pointer' }}
+            >
               {item.complete ? 'Complete' : 'Pending...'}
             </Badge>
             <strong className="mr-auto ml-4">{item.assignee}</strong>
           </Toast.Header>
-          <Toast.Body onClick={() => props.handleComplete(item)} style={{ cursor: 'pointer' }}>
-            <h3 className={`ml-3 ${item.complete ? 'text-muted text-decoration-line-through' : ''}`}>{item.text}</h3>
+          <Toast.Body>
+            <h3
+              className={`ml-3 ${
+                item.complete ? 'text-muted text-decoration-line-through' : ''
+              }`}
+            >
+              {item.text}
+            </h3>
             <br />
             <p className="float-right" style={{ fontSize: '85%' }}>
               Difficulty: {item.difficulty}
