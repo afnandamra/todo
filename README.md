@@ -1,10 +1,11 @@
 # LAB - Hooks API
 
-**To Do List Manager Phase 1:** Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
-**To Do List Manager Phase 2:** Connecting the To Do Application to an external API and Database
+- **To Do List Manager Phase 1:** Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
+- **To Do List Manager Phase 2:** Connecting the To Do Application to an external API and Database
+- **To Do List Manager Phase 3:** Add some configuration settings to the application
 
 **Author:** Afnan Damra
-**Version:** 1.1.0
+**Version:** 2.0.0
 
 **Links:**
 
@@ -16,7 +17,7 @@
 
 ### UML Diagram
 
-![UML Lab32](public/lab32.jpg)
+![UML Lab33](public/lab33.jpg)
 
 ## Resources
 
@@ -24,6 +25,8 @@
 - [React bootstrap docs](https://react-bootstrap.netlify.app/)
 - [starter code](https://github.com/LTUC/amman-javascript-401d7/tree/main/class-31/lab/starter-code)
 - [useFetch — A Custom React Hook](https://medium.com/swlh/usefetch-a-custom-react-hook-36d5f5819d8)
+- [very useful pagination source](https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia)
+- I did the pagination part with Omar Tarawneh, and TA Abdulhakim helped me fix useAjax hook
 
 ---
 
