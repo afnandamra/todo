@@ -6,7 +6,7 @@ function PaginationProvider(props) {
   const [itemCount, setItemCount] = useState(3);
   const [startingPage, setStartingPage] = useState(1);
   const [display, setDisplay] = useState(false);
-  const [sortField, setSortField] = useState('difficulty');
+  const [sortField, setSortField] = useState('difficultyA');
 
   const state = {
     display,
