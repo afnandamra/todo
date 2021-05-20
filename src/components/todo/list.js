@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Toast, Badge, Pagination, Form, Row, Col } from 'react-bootstrap';
 import { PaginationContext } from '../../context/pagenation';
 
@@ -7,18 +7,20 @@ const TodoList = (props) => {
   const [currentPage, setCurrentPage] = useState(context.startingPage);
   const maxItems = context.itemCount;
   // sorting hard-coded according to difficulty
-  const sortedList = props.list.sort((a, b) => a.difficulty - b.difficulty);
+  // const sortedList = props.list.sort((a, b) => a.difficulty - b.difficulty);
   // display completed items first
-  let allList = sortedList.sort((a, b) => {
-    return a.complete === b.complete ? 0 : a.complete ? 1 : -1;
-  });
-  // const [list, setList] = useState(allList);
-
+  // let allList = sortedList.sort((a, b) => {
+  //   return a.complete === b.complete ? 0 : a.complete ? 1 : -1;
+  // });
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    setList(props.list);
+  }, [props.list]);
   // logic
-  const numOfPages = allList.length / maxItems + 1;
+  const numOfPages = list.length / maxItems + 1;
   const indexOfLastItem = currentPage * maxItems;
   const indexOfFirstItem = indexOfLastItem - maxItems;
-  const currentList = allList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentList = list.slice(indexOfFirstItem, indexOfLastItem);
   const nextPage = (num) => setCurrentPage(num);
 
   const pageNums = [];
@@ -34,6 +36,7 @@ const TodoList = (props) => {
       </Pagination.Item>
     );
   }
+
   return (
     <>
       <Row>
@@ -64,27 +67,59 @@ const TodoList = (props) => {
               <option value="3">3</option>
               <option value="5">5</option>
               <option value="7">7</option>
-              <option value={allList.length}>All</option>
+              <option value={list.length}>All</option>
             </Form.Control>
           </Form>
         </Col>
-        {/* <Col>
+        <Col>
           <Form>
             <Form.Control
               as="select"
               onChange={(e) => {
-                console.log(e.target.value);
-                allList.filter(
-                  (item) => item.complete === Boolean(e.target.value)
-                );
+                if (e.target.value === 'all') setList(props.list);
+                else {
+                  let completed = list.filter(
+                    (item) => item.complete === Boolean(e.target.value)
+                  );
+                  setList(completed);
+                  setCurrentPage(1);
+                }
               }}
             >
-              <option value="3">Filter by</option>
-              <option value={true}>Completed</option>
-              <option value={false}>Pending</option>
+              <option value='all'>Filter by</option>
+              <option value={1}>Completed</option>
+              <option value=''>Pending</option>
             </Form.Control>
           </Form>
-        </Col> */}
+        </Col>
+        <Col>
+          <Form>
+            <Form.Control
+              as="select"
+              onChange={(e) => {
+                context.setSortField(e.target.value);
+                if (e.target.value === 'all') setList(props.list);
+                else if(e.target.value === 'difficultyA') {
+                  setList(list.sort((a, b) => a.difficulty - b.difficulty));
+                  setCurrentPage(1);
+                }
+                else if(e.target.value === 'difficultyD') {
+                  setList(list.sort((a, b) => b.difficulty - a.difficulty));
+                  setCurrentPage(1);
+                }
+                else if(e.target.value === 'complete') {
+                  setList(list.sort((a, b) => a.complete === b.complete ? 0 : a.complete ? 1 : -1));
+                  setCurrentPage(1);
+                }
+              }}
+            >
+              <option value='all'>Sort by</option>
+              <option value='difficultyA'>Difficulty (Ascending)</option>
+              <option value='difficultyD'>Difficulty (Descending)</option>
+              <option value='complete'>Completion</option>
+            </Form.Control>
+          </Form>
+        </Col>
       </Row>
       {currentList.map((item) => (
         <Toast
