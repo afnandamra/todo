@@ -3,15 +3,16 @@
 - **To Do List Manager Phase 1:** Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
 - **To Do List Manager Phase 2:** Connecting the To Do Application to an external API and Database
 - **To Do List Manager Phase 3:** Add some configuration settings to the application
+- **To Do List Manager Phase 4:** Adding security and access controls to the application.
 
-**Author:** Afnan Damra
-**Version:** 2.0.0
+### **Author:** Afnan Damra
+### **Version:** 3.0.0
 
 **Links:**
 
 - [Repo Link](https://github.com/afnandamra/todo)
 - [Deployed Site](https://ad-todo-401.netlify.app/)
-- [PR Link](https://github.com/afnandamra/todo/pull/3)
+- [PR Link](https://github.com/afnandamra/todo/pull/5)
 
 ## Documentation
 
@@ -26,7 +27,6 @@
 - [starter code](https://github.com/LTUC/amman-javascript-401d7/tree/main/class-31/lab/starter-code)
 - [useFetch — A Custom React Hook](https://medium.com/swlh/usefetch-a-custom-react-hook-36d5f5819d8)
 - [very useful pagination source](https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia)
-- I did the pagination part with Omar Tarawneh, and TA Abdulhakim helped me fix useAjax hook
 
 ---
 

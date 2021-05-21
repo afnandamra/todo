@@ -1,14 +1,26 @@
+import { useContext } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import useForm from '../../hooks/useForm.js';
+import { AuthContext } from '../../context/auth';
 
 const TodoForm = (props) => {
+  const authContext = useContext(AuthContext);
   const [_handleInputChange, _handleSubmit] = useForm(props.handleSubmit);
 
   return (
     <Card>
       <Card.Header as="h3">Add Item</Card.Header>
       <Card.Body>
-        <Form onSubmit={async (e) => {await _handleSubmit(e); await props.fetch();}}>
+        <Form
+          onSubmit={async (e) => {
+            if (authContext.user.capabilities.includes('create')) {
+              await _handleSubmit(e);
+              await props.fetch();
+            } else {
+              alert("You don't have the permession to create!");
+            }
+          }}
+        >
           <Form.Group>
             <Form.Label>To Do Item</Form.Label>
             <Form.Control

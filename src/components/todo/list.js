@@ -1,22 +1,19 @@
 import { useContext, useState, useEffect } from 'react';
 import { Toast, Badge, Pagination, Form, Row, Col } from 'react-bootstrap';
 import { PaginationContext } from '../../context/pagenation';
+import { AuthContext } from '../../context/auth';
 
 const TodoList = (props) => {
   const context = useContext(PaginationContext);
+  const authContext = useContext(AuthContext);
   const [currentPage, setCurrentPage] = useState(context.startingPage);
   const maxItems = context.itemCount;
-  // sorting hard-coded according to difficulty
-  // const sortedList = props.list.sort((a, b) => a.difficulty - b.difficulty);
-  // display completed items first
-  // let allList = sortedList.sort((a, b) => {
-  //   return a.complete === b.complete ? 0 : a.complete ? 1 : -1;
-  // });
   const [list, setList] = useState([]);
+
   useEffect(() => {
     setList(props.list);
   }, [props.list]);
-  // logic
+
   const numOfPages = list.length / maxItems + 1;
   const indexOfLastItem = currentPage * maxItems;
   const indexOfFirstItem = indexOfLastItem - maxItems;
@@ -78,17 +75,15 @@ const TodoList = (props) => {
               onChange={(e) => {
                 if (e.target.value === 'all') setList(props.list);
                 else {
-                  let completed = list.filter(
-                    (item) => item.complete === Boolean(e.target.value)
-                  );
+                  let completed = list.filter((item) => item.complete === Boolean(e.target.value));
                   setList(completed);
                   setCurrentPage(1);
                 }
               }}
             >
-              <option value='all'>Filter by</option>
+              <option value="all">Filter by</option>
               <option value={1}>Completed</option>
-              <option value=''>Pending</option>
+              <option value="">Pending</option>
             </Form.Control>
           </Form>
         </Col>
@@ -99,24 +94,26 @@ const TodoList = (props) => {
               onChange={(e) => {
                 context.setSortField(e.target.value);
                 if (e.target.value === 'all') setList(props.list);
-                else if(e.target.value === 'difficultyA') {
+                else if (e.target.value === 'difficultyA') {
                   setList(list.sort((a, b) => a.difficulty - b.difficulty));
                   setCurrentPage(1);
-                }
-                else if(e.target.value === 'difficultyD') {
+                } else if (e.target.value === 'difficultyD') {
                   setList(list.sort((a, b) => b.difficulty - a.difficulty));
                   setCurrentPage(1);
-                }
-                else if(e.target.value === 'complete') {
-                  setList(list.sort((a, b) => a.complete === b.complete ? 0 : a.complete ? 1 : -1));
+                } else if (e.target.value === 'complete') {
+                  setList(
+                    list.sort((a, b) =>
+                      a.complete === b.complete ? 0 : a.complete ? 1 : -1
+                    )
+                  );
                   setCurrentPage(1);
                 }
               }}
             >
-              <option value='all'>Sort by</option>
-              <option value='difficultyA'>Difficulty (Ascending)</option>
-              <option value='difficultyD'>Difficulty (Descending)</option>
-              <option value='complete'>Completion</option>
+              <option value="all">Sort by</option>
+              <option value="difficultyA">Difficulty (Ascending)</option>
+              <option value="difficultyD">Difficulty (Descending)</option>
+              <option value="complete">Completion</option>
             </Form.Control>
           </Form>
         </Col>
@@ -126,8 +123,12 @@ const TodoList = (props) => {
           key={item._id}
           style={{ maxWidth: '100%' }}
           onClose={async () => {
-            await props.handleDelete(item);
-            await props.fetch();
+            if (authContext.user.capabilities.includes('delete')) {
+              await props.handleDelete(item);
+              await props.fetch();
+            } else {
+              alert("You don't have the permession to delete!");
+            }
           }}
         >
           <Toast.Header>
@@ -135,8 +136,12 @@ const TodoList = (props) => {
               pill
               variant={item.complete ? 'success' : 'warning'}
               onClick={async () => {
-                await props.handleComplete(item);
-                await props.fetch();
+                if (authContext.user.capabilities.includes('update')) {
+                  await props.handleComplete(item);
+                  await props.fetch();
+                } else {
+                  alert("You don't have the permession to update!");
+                }
               }}
               style={{ cursor: 'pointer' }}
             >
